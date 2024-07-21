@@ -1,6 +1,6 @@
 # rl_amp
 
-This code aims to implement AMP on Legged_gym and rsl_rl with minimal modifications
+AMP implementation with minimal changes on legged_gym and rsl_rl
 
 **Code reference: [AMP_for_hardware](https://github.com/Alescontrela/AMP_for_hardware)**
 
@@ -41,5 +41,5 @@ python legged_gym/legged_gym/scripts/play.py --task=a1_amp
 Retarget motions
 
 ```bash
-python legged_gym/datasets/retarget_kp_motions.py
+python datasets/retarget_kp_motions.py
 ```

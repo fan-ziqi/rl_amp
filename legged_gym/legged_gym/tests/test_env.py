@@ -48,7 +48,7 @@ def test_env(args):
     env, _ = task_registry.make_env(name=args.task, args=args, env_cfg=env_cfg)
     for i in range(int(10*env.max_episode_length)):
         actions = 0.*torch.ones(env.num_envs, env.num_actions, device=env.device)
-        obs, _, rew, done, info = env.step(actions)
+        obs, _, rew, done, info, _, _ = env.step(actions)
     print("Done")
 
 if __name__ == '__main__':

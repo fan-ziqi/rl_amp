@@ -49,6 +49,15 @@ def play(args):
     env_cfg.noise.add_noise = False
     env_cfg.domain_rand.randomize_friction = False
     env_cfg.domain_rand.push_robots = False
+    env_cfg.domain_rand.randomize_gains = False
+    env_cfg.domain_rand.randomize_base_mass = False
+    train_cfg.runner.amp_num_preload_transitions = 1
+
+    # env_cfg.commands.ranges.lin_vel_x = [-2.0, 5.0] # min max [m/s]
+    # env_cfg.commands.ranges.lin_vel_y = [-2.0, 2.0]   # min max [m/s]
+    # env_cfg.commands.ranges.ang_vel_yaw = [-2.0, 2.0]    # min max [rad/s]
+    # env_cfg.commands.ranges.heading = [-3.14, 3.14]
+    # env_cfg.commands.heading_command = False
 
     # prepare environment
     env, _ = task_registry.make_env(name=args.task, args=args, env_cfg=env_cfg)
@@ -76,7 +85,7 @@ def play(args):
 
     for i in range(10*int(env.max_episode_length)):
         actions = policy(obs.detach())
-        obs, _, rews, dones, infos = env.step(actions.detach())
+        obs, _, rews, dones, infos, _, _ = env.step(actions.detach())
         if RECORD_FRAMES:
             if i % 2:
                 filename = os.path.join(LEGGED_GYM_ROOT_DIR, 'logs', train_cfg.runner.experiment_name, 'exported', 'frames', f"{img_idx}.png")
